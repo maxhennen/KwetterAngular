@@ -1,0 +1,35 @@
+.mcName {
+  width: 40%;
+  float: left;
+  margin-right: 10px;
+}
+
+.mcDetails {
+  width: 40%;
+  float: left;
+}
+
+.mcContent {
+  width: 40%;
+  float: left;
+  overflow: auto;
+  height: 300px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.mcContent .mat-card-content {
+  border-bottom: 1px solid black;
+}
+
+.mcOptions {
+  width: 40%;
+  float: left;
+  margin-top: 10px;
+}
+
+.mcFollowing {
+  width: 40%;
+  float: left;
+  margin-top: 10px;
+}

@@ -1,0 +1,45 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card class="mcSearch" *ngIf="!isLoading">
+  <mat-card-content>
+    <input placeholder="Search" type="text" class="form-control" (input)="searchChange($event.target.value)">
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="mcInfo" *ngIf="!isLoading">
+  <mat-card-title>
+    Information
+  </mat-card-title>
+  <mat-card-content>
+    <pre>Your kweets {{user.kweets.length}}</pre>
+    <pre>{{user.kweets[0].content}}</pre>
+    <pre>Following {{user.followings.length}}</pre>
+      <ng-container *ngFor="let u of user.followings; let i=index">
+        <a *ngIf="i<5" (click)="goToProfile(u.email)"> {{u.name}} </a>
+      </ng-container>
+    <pre>Followers {{user.followers.length}}</pre>
+    <ng-container *ngFor="let u of user.followers; let i=index">
+      <a *ngIf="i<5" (click)="goToProfile(u.email)"> {{u.name}} </a>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<mat-tab-group class="mtg">
+  <mat-tab label="Kweets">
+    <mat-card class="mcContent" *ngIf="!isLoading">
+      <mat-card-header>
+        <mat-card-title>
+          Kweets
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngFor="let k of kweets">
+        <pre>{{k.user}}</pre>
+        <pre>{{k.dateTime}}</pre>
+        <pre>{{k.content}}</pre>
+      </mat-card-content>
+    </mat-card>
+  </mat-tab>
+  <mat-tab label="Mentions">
+    <h1>Some more tab content</h1>
+    <p>...</p>
+  </mat-tab>
+</mat-tab-group>

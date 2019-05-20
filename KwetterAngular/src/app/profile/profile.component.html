@@ -1,0 +1,85 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-card class="mcName" *ngIf="!isLoading">
+    <mat-card-header>
+      <mat-card-title>
+        Change name
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (submit)="changeName(changeNameForm)" #changeNameForm="ngForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <input matInput name="name" ngModel type="text" [(ngModel)]="currentUser.name"/>
+        <button mat-button>Change</button>
+      </mat-form-field>
+      </form>
+    </mat-card-content>
+</mat-card>
+<mat-card class="mcDetails" *ngIf="!isLoading">
+  <mat-card-header>
+    <mat-card-title>
+      Details
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <pre>name: {{currentUser.name}}</pre>
+    <pre>email: {{currentUser.email}}</pre>
+    <pre>bio: {{currentUser.details.bio}}</pre>
+    <pre>website: {{currentUser.details.website}}</pre>
+    <pre>location: {{currentUser.details.location.country}}</pre>
+  </mat-card-content>
+</mat-card>
+<mat-card class="mcContent" *ngIf="!isLoading && content == 'kweets'">
+  <mat-card-header>
+    <mat-card-title>
+      Kweets
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content *ngFor="let k of currentUser.kweets">
+    <pre>{{k.user}}</pre>
+    <pre>{{k.dateTime}}</pre>
+    <pre>{{k.content}}</pre>
+  </mat-card-content>
+</mat-card>
+<mat-card class="mcContent" *ngIf="!isLoading && content == 'followers'">
+  <mat-card-header>
+    <mat-card-title>
+      Followers
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content *ngFor="let k of currentUser.followers">
+    <a (click)="getUser(k.email)">{{k.name}}</a>
+  </mat-card-content>
+</mat-card>
+<mat-card class="mcContent" *ngIf="!isLoading && content == 'following'">
+  <mat-card-header>
+    <mat-card-title>
+      Following
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content *ngFor="let k of currentUser.followings">
+    <a (click)="getUser(k.email)">{{k.name}}</a>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="mcOptions" *ngIf="!isLoading">
+  <mat-card-header>
+    Options
+  </mat-card-header>
+  <mat-card-content>
+    <form (submit)="changeContent('followers')">
+      <mat-form-field>
+        <button mat-raised-button color="accent" type="submit">Followers</button>
+      </mat-form-field>
+    </form>
+    <form (submit)="changeContent('following')">
+      <mat-form-field>
+        <button mat-raised-button color="accent" type="submit">Following</button>
+      </mat-form-field>
+    </form>
+    <form (submit)="changeContent('kweets')">
+    <mat-form-field>
+      <button mat-raised-button color="accent" type="submit">Kweets</button>
+    </mat-form-field>
+  </form>
+  </mat-card-content>
+</mat-card>
